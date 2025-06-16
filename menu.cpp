@@ -3,8 +3,6 @@
 #include <iostream>
 #include <limits> // Para limpar o buffer de entrada
 
-// --- Implementação do Menu ---
-
 Menu::Menu() {
     inicializarDados();
 }
