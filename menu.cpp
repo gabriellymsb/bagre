@@ -99,8 +99,41 @@ void Menu::cadastrarCliente() {
 }
 
 void Menu::cadastrarProduto() {
-    // Implementação simplificada, pode ser expandida
-    std::cout << "\nFuncao de cadastrar produto ainda nao implementada." << std::endl;
+    std::cout << "\n--- Cadastro de Novo Produto ---" << std::endl;
+    
+    std::string nome;
+    double preco;
+    int cat_opcao;
+    Categoria categoriaSelecionada;
+
+    // Gera um código simples. Em um sistema real, seria mais robusto.
+    int codigo = produtos.empty() ? 401 : produtos.back().getCodigo() + 1;
+
+    std::cout << "Nome do produto: ";
+    std::getline(std::cin, nome);
+
+    std::cout << "Preco do produto: ";
+    std::cin >> preco;
+
+    std::cout << "Selecione a Categoria:" << std::endl;
+    std::cout << "1. Alimento | 2. Bebida | 3. Eletronico | 4. Vestuario | 5. Livro | 6. Limpeza" << std::endl;
+    std::cout << "Opcao: ";
+    std::cin >> cat_opcao;
+
+    switch (cat_opcao) {
+        case 1: categoriaSelecionada = Categoria::ALIMENTO; break;
+        case 2: categoriaSelecionada = Categoria::BEBIDA; break;
+        case 3: categoriaSelecionada = Categoria::ELETRONICO; break;
+        case 4: categoriaSelecionada = Categoria::VESTUARIO; break;
+        case 5: categoriaSelecionada = Categoria::LIVRO; break;
+        case 6: categoriaSelecionada = Categoria::LIMPEZA; break;
+        default:
+            std::cout << "Categoria invalida. Cadastro cancelado." << std::endl;
+            return;
+    }
+
+    produtos.emplace_back(codigo, nome, preco, categoriaSelecionada);
+    std::cout << "Produto '" << nome << "' cadastrado com sucesso! Codigo: " << codigo << std::endl;
 }
 
 void Menu::cadastrarPedido() {
@@ -157,14 +190,23 @@ void Menu::listarProdutos() const {
 }
 
 void Menu::listarPedidos() const {
-    std::cout << "\n--- Histórico de Pedidos ---" << std::endl;
+    std::cout << "\n\n<<<<<<<<<< HISTORICO GERAL DE PEDIDOS >>>>>>>>>>" << std::endl;
     if (pedidos.empty()) {
         std::cout << "Nenhum pedido registrado." << std::endl;
+        std::cout << "<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>\n" << std::endl;
         return;
     }
-    for (const auto* ped : pedidos) {
-        ped->exibirPedido();
+
+    double totalGeral = 0.0;
+    for (const auto& ped : pedidos) {
+        ped->exibirPedido(); // Este método já exibe o total individual do pedido
+        totalGeral += ped->getValorFinal();
     }
+
+    std::cout << "==============================================" << std::endl;
+    std::cout << "      >>> VALOR TOTAL DE TODOS OS PEDIDOS: R$ " 
+              << std::fixed << std::setprecision(2) << totalGeral << " <<<" << std::endl;
+    std::cout << "==============================================\n" << std::endl;
 }
 
 Cliente* Menu::selecionarCliente() {
