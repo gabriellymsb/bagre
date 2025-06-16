@@ -13,7 +13,7 @@ private:
     std::string cidade;
 
 public:
-    Endereco(std::string& r = "", int n = 0, const std::string& b = "", const std::string& c = "");
+    Endereco(const std::string& r = "", int n = 0, const std::string& b = "", const std::string& c = "");
 
     void mostrarEndereco() const;
 };
