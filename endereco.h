@@ -7,13 +7,13 @@
 
 class Endereco {
 private:
-    int rua;
+    std::string rua;
     int numero;
     std::string bairro;
     std::string cidade;
 
 public:
-    Endereco(int r = 0, int n = 0, const std::string& b = "", const std::string& c = "");
+    Endereco(std::string& r = "", int n = 0, const std::string& b = "", const std::string& c = "");
 
     void mostrarEndereco() const;
 };

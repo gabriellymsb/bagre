@@ -71,7 +71,7 @@ void Menu::cadastrarCliente() {
 
     std::cout << "Nome: ";
     std::getline(std::cin, nome);
-    std::cout << "Endereco - Rua (numero): ";
+    std::cout << "Endereco - Rua: ";
     std::cin >> rua;
     std::cout << "Endereco - Numero: ";
     std::cin >> num;
